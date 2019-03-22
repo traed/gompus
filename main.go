@@ -22,10 +22,6 @@ type room struct {
 	description string
 }
 
-func newRoom(nr int) room {
-	return room{number: nr}
-}
-
 func (r *room) connect(nr int) {
 	if contains(r.connectsTo, nr) == -1 {
 		r.connectsTo = append(r.connectsTo, nr)
@@ -36,7 +32,7 @@ func (r *room) describe() {
 	if r.description != "" {
 		fmt.Println(r.description)
 	} else {
-		fmt.Printf("Du är i rum %d.\nGångar leder till %v", r.number, r.connectsTo)
+		fmt.Printf("Du är i rum %d.\nGångar leder till %v\n", r.number, r.connectsTo)
 	}
 }
 
@@ -153,7 +149,7 @@ func main() {
 		player.location.describe()
 
 		// Is there anything nearby?
-		for currentRoom := range player.location.connectsTo {
+		for _, currentRoom := range player.location.connectsTo {
 			if wumpus.location.number == currentRoom {
 				fmt.Println("Det luktar Wumpus...")
 			}
