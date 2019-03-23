@@ -9,17 +9,14 @@ import (
 	"strings"
 )
 
-var name string
 var cave []room
 var wumpus, player, pit1, pit2, bats1, bats2 thing
 var arrows int
 
 // Room
 type room struct {
-	number      int
-	name        string
-	connectsTo  []int
-	description string
+	number     int
+	connectsTo []int
 }
 
 func (r *room) connect(nr int) {
@@ -29,16 +26,11 @@ func (r *room) connect(nr int) {
 }
 
 func (r *room) describe() {
-	if r.description != "" {
-		fmt.Println(r.description)
-	} else {
-		fmt.Printf("Du är i rum %d.\nGångar leder till %v\n", r.number, r.connectsTo)
-	}
+	fmt.Printf("Du är i rum %d.\nGångar leder till %v\n", r.number, r.connectsTo)
 }
 
 // Thing
 type thing struct {
-	name     string
 	location *room
 }
 
